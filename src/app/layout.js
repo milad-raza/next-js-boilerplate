@@ -1,7 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import RedirectHandler from "@/components/redirectHandler/redirectHandler";
-import { Providers } from "@/redux/providers";
+import Providers from "@/providers/providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,10 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <RedirectHandler />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

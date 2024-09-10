@@ -4,10 +4,13 @@ import {
   useAddPostMutation,
   useGetPostsQuery,
 } from "@/redux/services/apiSlice";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/react";
 
 export default function Home() {
   const { data, error, isLoading } = useGetPostsQuery();
+  const { theme, setTheme } = useTheme()
 
   const [
     addPost,
@@ -34,24 +37,29 @@ export default function Home() {
     <div className="flex flex-col items-center">
       <h1 className="text-center text-3xl">Home</h1>
       foo:{data?.foo} test:{data?.test},
-      <button
-        className="bg-black text-white p-3 mt-3 rounded-md"
+      <Button
+        className="bg-primary p-3 mt-3 rounded-md"
         onClick={() => router.push("/login")}
       >
         login
-      </button>
-      <button
-        className="bg-black text-white p-3 mt-3 rounded-md"
+      </Button>
+      <Button
+        className="bg-primary p-3 mt-3 rounded-md"
         onClick={() => router.push("/dashboard")}
       >
         dashboard
-      </button>
-      <button
-        className="bg-black text-white p-3 mt-3 rounded-md"
+      </Button>
+      <Button
+        className="bg-primary p-3 mt-3 rounded-md"
         onClick={handleAddPost}
       >
         Add Post
-      </button>
+      </Button>
+
+      <>
+      The current theme is: {theme}
+      <Button className="mt-5" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>Toggle theme</Button>
+    </>
     </div>
   );
 }
