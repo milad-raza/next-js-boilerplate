@@ -25,8 +25,8 @@ const config = {
           "--secondary": "#260d2d",
         },
         ".dark": {
-          "--primary": "#006FEE",
-          "--secondary": "#ffffff",
+          "--primary": "#BEF264",
+          "--secondary": "#260d2d",
         },
       });
     },
@@ -36,20 +36,12 @@ const config = {
           colors: {
             background: "#EEEEEE",
             foreground: "#000000",
-            primary: {
-              foreground: "var(--secondary)",
-              DEFAULT: "var(--primary)",
-            },
           },
         },
         dark: {
           colors: {
             background: "#000000",
-            foreground: "#ffffff",
-            primary: {
-              foreground: "var(--secondary)",
-              DEFAULT: "var(--primary)",
-            },
+            foreground: "#FFFFFF",
           },
         },
       },

@@ -38,19 +38,22 @@ export default function Home() {
       <h1 className="text-center text-3xl">Home</h1>
       foo:{data?.foo} test:{data?.test},
       <Button
-        className="bg-primary p-3 mt-3 rounded-md"
+        color="secondary"
+        className="p-3 mt-3 rounded-md"
         onClick={() => router.push("/login")}
       >
         login
       </Button>
       <Button
-        className="bg-primary p-3 mt-3 rounded-md"
+        color="primary"
+        variant="ghost"
+        className="p-3 mt-3 rounded-md dark:hover:!text-black"
         onClick={() => router.push("/dashboard")}
       >
         dashboard
       </Button>
       <Button
-        className="bg-primary p-3 mt-3 rounded-md"
+        className="p-3 mt-3 rounded-md"
         onClick={handleAddPost}
       >
         Add Post
