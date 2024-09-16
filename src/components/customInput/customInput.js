@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { Input } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Controller } from "react-hook-form";
 
 const CustomInput = (props) => {
   const {
@@ -12,48 +12,57 @@ const CustomInput = (props) => {
     labelPlacement = "outside",
     variant = "bordered",
     classNames,
+    startContent,
     endContent,
     errorMessage,
-    register,
     disabled,
-    rules,
     formatType,
     isRequired,
-    setValue,
+    control,
   } = props;
 
-  const [formattedValue, setFormattedValue] = useState("");
-  const field = register(name, rules);
-
-  const handleChange = (e) => {
-    const value = e.target.value;
+  const formatNumber = (value) => {
     if (formatType === "AMOUNT") {
-      const rawValue = value?.replace(/,/g, "");
-      const formatted = rawValue?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      setValue(name, formatted, { shouldValidate: true });
-      setFormattedValue(formatted);
+      return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     } else {
-      field.onChange(e);
-      setFormattedValue(value);
+      return value;
+    }
+  };
+
+  const parseNumber = (value) => {
+    if (formatType === "AMOUNT") {
+      return value.replace(/\$\s?|(,*)/g, "");
+    } else {
+      return value;
     }
   };
 
   return (
-    <Input
-      {...field}
-      value={formattedValue}
-      onChange={handleChange}
-      label={label}
-      type={type}
-      variant={variant}
-      disabled={Boolean(disabled)}
-      placeholder={placeholder}
-      labelPlacement={labelPlacement}
-      endContent={endContent}
-      classNames={classNames}
-      isRequired={Boolean(isRequired)}
-      isInvalid={Boolean(errorMessage)}
-      errorMessage={errorMessage}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <Input
+          {...field}
+          type={type}
+          label={label}
+          variant={variant}
+          className={classNames}
+          labelPlacement={labelPlacement}
+          placeholder={placeholder}
+          value={formatNumber(field?.value)}
+          onChange={(e) => {
+            const parsedValue = parseNumber(e.target.value);
+            field?.onChange(parsedValue);
+          }}
+          isRequired={Boolean(isRequired)}
+          disabled={Boolean(disabled)}
+          isInvalid={Boolean(errorMessage)}
+          errorMessage={errorMessage}
+          startContent={startContent}
+          endContent={endContent}
+        />
+      )}
     />
   );
 };

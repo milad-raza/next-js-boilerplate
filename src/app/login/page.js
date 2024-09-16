@@ -7,17 +7,19 @@ import { Button } from "@nextui-org/react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
 import CustomInput from "@/components/customInput/customInput";
+import CustomSelect from "@/components/customSelect/customSelect";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
-  amount: yup.string().min(1).required(),
+  animal: yup.string().required(),
+  amount: yup.string().required(),
 });
 
 export default function Login() {
   const {
-    register,
     handleSubmit,
+    control,
     formState: { errors },
     reset,
   } = useForm({
@@ -25,6 +27,7 @@ export default function Login() {
     defaultValues: {
       email: "",
       password: "",
+      animal: "",
       amount: "",
     },
   });
@@ -37,6 +40,22 @@ export default function Login() {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
+  const items = [
+    { key: "cat", label: "Cat" },
+    { key: "dog", label: "Dog" },
+    { key: "elephant", label: "Elephant" },
+    { key: "lion", label: "Lion" },
+    { key: "tiger", label: "Tiger" },
+    { key: "giraffe", label: "Giraffe" },
+    { key: "dolphin", label: "Dolphin" },
+    { key: "penguin", label: "Penguin" },
+    { key: "zebra", label: "Zebra" },
+    { key: "shark", label: "Shark" },
+    { key: "whale", label: "Whale" },
+    { key: "otter", label: "Otter" },
+    { key: "crocodile", label: "Crocodile" },
+  ];
+
   return (
     <div className="w-full flex justify-between items-center h-screen">
       <div className="w-1/2 bg-primary h-scr"></div>
@@ -48,7 +67,7 @@ export default function Login() {
             <CustomInput
               name="email"
               label="Email"
-              register={register}
+              control={control}
               isRequired={true}
               errorMessage={errors.email?.message}
             />
@@ -58,7 +77,7 @@ export default function Login() {
               name="password"
               type={isVisible ? "text" : "password"}
               label="Password"
-              register={register}
+              control={control}
               isRequired={true}
               errorMessage={errors.password?.message}
               endContent={
@@ -74,6 +93,26 @@ export default function Login() {
                   />
                 )
               }
+            />
+          </div>
+          <div className="mt-10">
+            <CustomInput
+              name="amount"
+              label="Amount"
+              formatType="AMOUNT"
+              control={control}
+              isRequired={true}
+              errorMessage={errors.amount?.message}
+            />
+          </div>
+          <div className="mt-10">
+            <CustomSelect
+              name="animal"
+              label="Animal"
+              isRequired={true}
+              items={items}
+              control={control}
+              errorMessage={errors.animal?.message}
             />
           </div>
           <Button type="submit" className="mt-5">
