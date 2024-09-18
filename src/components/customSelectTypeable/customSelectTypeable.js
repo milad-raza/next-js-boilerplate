@@ -1,9 +1,14 @@
 "use client";
 
-import { Select, SelectItem } from "@nextui-org/react";
+import {
+  Autocomplete,
+  AutocompleteItem,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 import { Controller } from "react-hook-form";
 
-const CustomSelect = (props) => {
+const CustomSelectTypeable = (props) => {
   const {
     label,
     name,
@@ -11,7 +16,6 @@ const CustomSelect = (props) => {
     labelPlacement = "outside",
     variant = "bordered",
     disabledKeys = [],
-    selectionMode = "single",
     classNames,
     items,
     startContent,
@@ -28,7 +32,7 @@ const CustomSelect = (props) => {
         name={name}
         control={control}
         render={({ field }) => (
-          <Select
+          <Autocomplete
             {...field}
             label={
               <>
@@ -36,9 +40,14 @@ const CustomSelect = (props) => {
                 {isRequired && <span className="text-danger ml-[2px]">*</span>}
               </>
             }
-            className={field?.value == "" && "text-default-500"}
-            classNames={classNames}
-            selectedKeys={selectionMode === "multiple" ? field?.value : [field?.value]}
+            className={`block ${field?.value === "" && "text-default-500"}`}
+            classNames={{
+              selectorButton: Boolean(errorMessage)
+                ? "text-danger"
+                : field?.value === "" && "text-default-500",
+              ...classNames,
+            }}
+            selectedKeys={field?.value}
             placeholder={placeholder}
             errorMessage={errorMessage}
             isInvalid={Boolean(errorMessage)}
@@ -48,23 +57,18 @@ const CustomSelect = (props) => {
             labelPlacement={labelPlacement}
             isDisabled={Boolean(isDisabled)}
             disabledKeys={disabledKeys}
-            selectionMode={selectionMode}
-            onChange={(e) =>
-              selectionMode === "multiple"
-                ? field.onChange(Array.from(new Set(e.target.value.split(","))))
-                : field.onChange(e.target.value)
-            }
+            onInputChange={(e) => field.onChange(e)}
           >
             {items.map((item) => (
-              <SelectItem key={item.key} value={item.key}>
+              <AutocompleteItem key={item.key} value={item.key}>
                 {item.label}
-              </SelectItem>
+              </AutocompleteItem>
             ))}
-          </Select>
+          </Autocomplete>
         )}
       />
     </>
   );
 };
 
-export default CustomSelect;
+export default CustomSelectTypeable;

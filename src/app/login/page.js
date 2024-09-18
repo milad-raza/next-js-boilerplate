@@ -8,12 +8,14 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
 import CustomInput from "@/components/customInput/customInput";
 import CustomSelect from "@/components/customSelect/customSelect";
+import CustomSelectTypeable from "@/components/customSelectTypeable/customSelectTypeable";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
   animal: yup.string().required(),
   amount: yup.string().required(),
+  city: yup.string().required(),
 });
 
 export default function Login() {
@@ -29,6 +31,7 @@ export default function Login() {
       password: "",
       animal: "",
       amount: "",
+      city: "",
     },
   });
 
@@ -113,6 +116,16 @@ export default function Login() {
               items={items}
               control={control}
               errorMessage={errors.animal?.message}
+            />
+          </div>
+          <div className="mt-10">
+            <CustomSelectTypeable
+              name="city"
+              label="City"
+              isRequired={true}
+              items={items}
+              control={control}
+              errorMessage={errors.city?.message}
             />
           </div>
           <Button type="submit" className="mt-5">
