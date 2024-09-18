@@ -30,7 +30,7 @@ const CustomSelect = (props) => {
         render={({ field }) => (
           <Select
             {...field}
-            label={label}
+            label={<>{label}{isRequired && <span className="text-danger ml-[2px]">*</span>}</>}
             className={field?.value == "" && "text-gray-400"}
             selectedKeys={[field?.value]}
             placeholder={placeholder}
@@ -41,7 +41,6 @@ const CustomSelect = (props) => {
             endContent={endContent}
             labelPlacement={labelPlacement}
             classNames={classNames}
-            isRequired={Boolean(isRequired)}
             disabled={Boolean(disabled)}
             disabledKeys={disabledKeys}
             selectionMode={selectionMode}
