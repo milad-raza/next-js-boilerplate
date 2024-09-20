@@ -11,11 +11,12 @@ const CustomInput = (props) => {
     type = "text",
     labelPlacement = "outside",
     variant = "bordered",
+    className,
     classNames,
     startContent,
     endContent,
     errorMessage,
-    disabled,
+    isDisabled,
     formatType,
     isRequired,
     control,
@@ -47,7 +48,8 @@ const CustomInput = (props) => {
           type={type}
           label={label}
           variant={variant}
-          className={classNames}
+          className={className}
+          classNames={{ ...classNames, input: "!ps-0" }}
           labelPlacement={labelPlacement}
           placeholder={placeholder}
           value={formatNumber(field?.value)}
@@ -56,11 +58,23 @@ const CustomInput = (props) => {
             field?.onChange(parsedValue);
           }}
           isRequired={Boolean(isRequired)}
-          disabled={Boolean(disabled)}
+          isDisabled={Boolean(isDisabled)}
           isInvalid={Boolean(errorMessage)}
           errorMessage={errorMessage}
-          startContent={startContent}
-          endContent={endContent}
+          startContent={
+            <div
+              className={Boolean(errorMessage) ? "text-danger" : "text-primary"}
+            >
+              {startContent}
+            </div>
+          }
+          endContent={
+            <div
+              className={Boolean(errorMessage) ? "text-danger" : "text-primary"}
+            >
+              {endContent}
+            </div>
+          }
         />
       )}
     />

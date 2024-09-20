@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Autocomplete,
-  AutocompleteItem,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { Controller } from "react-hook-form";
 
 const CustomSelectTypeable = (props) => {
@@ -16,6 +11,7 @@ const CustomSelectTypeable = (props) => {
     labelPlacement = "outside",
     variant = "bordered",
     disabledKeys = [],
+    className,
     classNames,
     items,
     startContent,
@@ -40,11 +36,14 @@ const CustomSelectTypeable = (props) => {
                 {isRequired && <span className="text-danger ml-[2px]">*</span>}
               </>
             }
-            className={`block ${field?.value === "" && "text-default-500"}`}
+            className={`block ${className}`}
             classNames={{
               selectorButton: Boolean(errorMessage)
                 ? "text-danger"
-                : field?.value === "" && "text-default-500",
+                : "text-primary",
+              clearButton: Boolean(errorMessage)
+                ? "text-danger"
+                : "text-primary",
               ...classNames,
             }}
             selectedKeys={field?.value}
@@ -57,7 +56,7 @@ const CustomSelectTypeable = (props) => {
             labelPlacement={labelPlacement}
             isDisabled={Boolean(isDisabled)}
             disabledKeys={disabledKeys}
-            onInputChange={(e) => field.onChange(e)}
+            onSelectionChange={(e) => field.onChange(e)}
           >
             {items.map((item) => (
               <AutocompleteItem key={item.key} value={item.key}>

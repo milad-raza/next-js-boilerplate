@@ -21,12 +21,12 @@ const config = {
     function ({ addBase }) {
       addBase({
         ":root": {
-          "--primary": "#fc6f00",
-          "--secondary": "#260d2d",
+          "--primary": "#FC6F00",
+          "--secondary": "#260D2D",
         },
         ".dark": {
           "--primary": "#BEF264",
-          "--secondary": "#260d2d",
+          "--secondary": "#260D2D",
         },
       });
     },
@@ -34,14 +34,14 @@ const config = {
       themes: {
         light: {
           colors: {
-            background: "#EEEEEE",
-            foreground: "#000000",
+            background: "#FFFFFF",
+            foreground: "#FC6F00",
           },
         },
         dark: {
           colors: {
             background: "#000000",
-            foreground: "#FFFFFF",
+            foreground: "#BEF264",
           },
         },
       },

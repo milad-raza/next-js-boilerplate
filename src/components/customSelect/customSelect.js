@@ -1,9 +1,12 @@
 "use client";
 
 import { Select, SelectItem } from "@nextui-org/react";
+import { useTheme } from "next-themes";
 import { Controller } from "react-hook-form";
 
 const CustomSelect = (props) => {
+  const { theme } = useTheme();
+
   const {
     label,
     name,
@@ -12,6 +15,7 @@ const CustomSelect = (props) => {
     variant = "bordered",
     disabledKeys = [],
     selectionMode = "single",
+    className,
     classNames,
     items,
     startContent,
@@ -36,9 +40,19 @@ const CustomSelect = (props) => {
                 {isRequired && <span className="text-danger ml-[2px]">*</span>}
               </>
             }
-            className={field?.value == "" && "text-default-500"}
-            classNames={classNames}
-            selectedKeys={selectionMode === "multiple" ? field?.value : [field?.value]}
+            className={`${
+              field?.value == "" &&
+              (theme === "dark" ? "!text-default-500" : "!text-default-400")
+            } ${className}`}
+            classNames={{
+              ...classNames,
+              selectorIcon: Boolean(errorMessage)
+                ? "text-danger"
+                : "text-primary",
+            }}
+            selectedKeys={
+              selectionMode === "multiple" ? field?.value : [field?.value]
+            }
             placeholder={placeholder}
             errorMessage={errorMessage}
             isInvalid={Boolean(errorMessage)}
