@@ -7,8 +7,8 @@ export const metadata = {
 
 export default function DashboardLayout({ children }) {
   return (
-    <AuthGuard>
-      <div>{children}</div>
-    </AuthGuard>
+    // <AuthGuard>
+      children
+    // </AuthGuard>
   );
 }
