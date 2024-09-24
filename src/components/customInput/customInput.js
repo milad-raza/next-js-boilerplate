@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@nextui-org/react";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 const CustomInput = (props) => {
   const {
@@ -15,12 +15,15 @@ const CustomInput = (props) => {
     classNames,
     startContent,
     endContent,
-    errorMessage,
     isDisabled,
     formatType,
     isRequired,
-    control,
   } = props;
+
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   const formatNumber = (value) => {
     if (formatType === "AMOUNT") {
@@ -59,18 +62,18 @@ const CustomInput = (props) => {
           }}
           isRequired={Boolean(isRequired)}
           isDisabled={Boolean(isDisabled)}
-          isInvalid={Boolean(errorMessage)}
-          errorMessage={errorMessage}
+          isInvalid={Boolean(errors[name])}
+          errorMessage={errors[name]?.message}
           startContent={
             <div
-              className={Boolean(errorMessage) ? "text-danger" : "text-primary"}
+              className={Boolean(errors[name]) ? "text-danger" : "text-primary"}
             >
               {startContent}
             </div>
           }
           endContent={
             <div
-              className={Boolean(errorMessage) ? "text-danger" : "text-primary"}
+              className={Boolean(errors[name]) ? "text-danger" : "text-primary"}
             >
               {endContent}
             </div>

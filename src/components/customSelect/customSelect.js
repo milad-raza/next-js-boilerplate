@@ -2,7 +2,7 @@
 
 import { Select, SelectItem } from "@nextui-org/react";
 import { useTheme } from "next-themes";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 const CustomSelect = (props) => {
   const { theme } = useTheme();
@@ -20,11 +20,14 @@ const CustomSelect = (props) => {
     items,
     startContent,
     endContent,
-    errorMessage,
     isDisabled,
     isRequired,
-    control,
   } = props;
+
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <>
@@ -46,7 +49,7 @@ const CustomSelect = (props) => {
             } ${className}`}
             classNames={{
               ...classNames,
-              selectorIcon: Boolean(errorMessage)
+              selectorIcon: Boolean(errors[name])
                 ? "text-danger"
                 : "text-primary",
             }}
@@ -54,8 +57,8 @@ const CustomSelect = (props) => {
               selectionMode === "multiple" ? field?.value : [field?.value]
             }
             placeholder={placeholder}
-            errorMessage={errorMessage}
-            isInvalid={Boolean(errorMessage)}
+            errorMessage={errors[name]?.message}
+            isInvalid={Boolean(errors[name])}
             variant={variant}
             startContent={startContent}
             endContent={endContent}
@@ -65,7 +68,11 @@ const CustomSelect = (props) => {
             selectionMode={selectionMode}
             onChange={(e) =>
               selectionMode === "multiple"
-                ? field.onChange(Array.from(new Set(e.target.value.split(","))))
+                ? field.onChange(
+                    Array.from(new Set(e.target.value.split(","))).filter(
+                      (v) => v !== ""
+                    )
+                  )
                 : field.onChange(e.target.value)
             }
           >

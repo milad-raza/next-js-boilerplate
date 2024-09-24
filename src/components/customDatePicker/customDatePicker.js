@@ -1,7 +1,7 @@
 "use client";
 
 import { DatePicker } from "@nextui-org/react";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { useTheme } from "next-themes";
 
 const CustomDatePicker = (props) => {
@@ -15,14 +15,16 @@ const CustomDatePicker = (props) => {
     classNames,
     startContent,
     endContent,
-    errorMessage,
     isDisabled,
     isRequired,
-    control,
     minDate,
     maxDate,
   } = props;
   const { theme } = useTheme();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <Controller
@@ -36,7 +38,7 @@ const CustomDatePicker = (props) => {
           className={className}
           classNames={{
             ...classNames,
-            selectorIcon: Boolean(errorMessage)
+            selectorIcon: Boolean(errors[name])
               ? "text-danger"
               : "text-primary",
           }}
@@ -52,8 +54,8 @@ const CustomDatePicker = (props) => {
           placeholderValue={placeholderValue}
           isRequired={Boolean(isRequired)}
           isDisabled={Boolean(isDisabled)}
-          isInvalid={Boolean(errorMessage)}
-          errorMessage={errorMessage}
+          isInvalid={Boolean(errors[name])}
+          errorMessage={errors[name]?.message}
           startContent={startContent}
           endContent={endContent}
           minValue={minDate}
