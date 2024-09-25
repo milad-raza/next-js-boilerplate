@@ -7,3 +7,7 @@ export function setCookie(name, value, days) {
   }
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
+
+export function deleteCookie(name) {
+  document.cookie = `${name}=; Max-Age=-99999999; path=/`;
+}

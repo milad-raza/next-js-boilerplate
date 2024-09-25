@@ -10,7 +10,7 @@ export default function Providers({ children }) {
   return (
     <Provider store={store}>
       <RedirectHandler />
-      <NextUIProvider disableBaseline="true">
+      <NextUIProvider>
         <NextThemesProvider attribute="class" defaultTheme="dark">
           {children}
         </NextThemesProvider>
