@@ -6,12 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, Switch } from "@nextui-org/react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import CustomInput from "@/components/customInput/customInput";
-import CustomSelect from "@/components/customSelect/customSelect";
-import CustomSelectTypeable from "@/components/customSelectTypeable/customSelectTypeable";
-import CustomDatePicker from "@/components/customDatePicker/customDatePicker";
+import CustomInput from "@/components/ui/customInput";
+import CustomSelect from "@/components/ui/customSelect";
+import CustomSelectTypeable from "@/components/ui/customSelectTypeable";
+import CustomDatePicker from "@/components/ui/customDatePicker";
 import { useTheme } from "next-themes";
-import ClientOnly from "@/components/clientOnly/clientOnly";
+import ClientOnly from "@/components/ui/clientOnly";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),

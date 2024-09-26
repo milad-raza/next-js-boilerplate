@@ -1,4 +1,4 @@
-import AuthGuard from "@/components/authGuard/authGuard";
+import AuthGuard from "@/components/ui/authGuard";
 
 export const metadata = {
   title: "Dashboard",

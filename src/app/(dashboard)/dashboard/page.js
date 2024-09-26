@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteCookie } from "@/utils";
+import { deleteCookie } from "@/lib/utils";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 

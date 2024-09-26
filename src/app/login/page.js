@@ -6,9 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button } from "@nextui-org/react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import CustomInput from "@/components/customInput/customInput";
+import CustomInput from "@/components/ui/customInput";
 import { useRouter } from "next/navigation";
-import { setCookie } from "@/utils";
+import { setCookie } from "@/lib/utils";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -36,12 +36,12 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="w-full flex justify-between items-center h-screen">
-        <div className="w-1/2 bg-primary h-scr"></div>
-        <div className="w-1/2 flex justify-center">
+    <div className="flex justify-center items-center">
+      <div className="w-full flex justify-between items-center h-screen max-w-7xl px-6">
+        <div className="w-1/2 bg-primary h-scr hidden md:block"></div>
+        <div className="w-full md:w-1/2 flex justify-center">
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmitHandler)} className="w-7/12">
+            <form onSubmit={handleSubmit(onSubmitHandler)} className="w-full">
               <h2>Sign in</h2>
               <div className="mt-10">
                 <CustomInput name="email" label="Email" isRequired={true} />
@@ -75,6 +75,6 @@ export default function Login() {
           </FormProvider>
         </div>
       </div>
-    </>
+    </div>
   );
 }
