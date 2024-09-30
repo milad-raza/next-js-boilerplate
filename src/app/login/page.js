@@ -26,13 +26,13 @@ export default function Login() {
   const { handleSubmit, reset } = methods;
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-  const router = useRouter()
+  const router = useRouter();
 
   const onSubmitHandler = (data) => {
     console.log({ data });
     reset();
-    setCookie("access-token", "token", 3)
-    router.push("/dashboard")
+    setCookie("access-token", "token", 3);
+    router.push("/dashboard");
   };
 
   return (

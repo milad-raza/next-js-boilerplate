@@ -1,9 +1,9 @@
 // store.js
-import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
-import { apiSlice } from './services/apiSlice'; 
-import appReducer from './services/appSlice'; 
-import apiMiddleware from './apiMiddleware';
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { apiSlice } from "./services/apiSlice"; 
+import appReducer from "./services/appSlice"; 
+import apiMiddleware from "./apiMiddleware";
 
 export const store = configureStore({
   reducer: {

@@ -40,7 +40,7 @@ const CustomSelectTypeable = (props) => {
         setIsResetting(false);
       }, 0);
     }
-  }, [fieldValue]);
+  }, [fieldValue, clearErrors, name]);
 
   return (
     <Controller
