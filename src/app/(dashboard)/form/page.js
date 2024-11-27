@@ -13,7 +13,7 @@ import CustomDatePicker from "@/components/ui/customDatePicker";
 import { useTheme } from "next-themes";
 import ClientOnly from "@/components/ui/clientOnly";
 
-const schema = yup.object().shape({
+const schema = yup.object().shape({          
   email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
   amount: yup.string().required(),
@@ -33,7 +33,7 @@ export default function Form() {
       hobby: [],
       amount: "",
       city: "",
-      birthDate: null,
+      birthDate: null,                          
     },
   });
 
